@@ -24,6 +24,10 @@ public class Main {
         FileReader file2 = new FileReader(inputFiles.get(1));
         System.out.println(file1.input);
         System.out.println(file2.input);
+        LineParser file1LP = new LineParser(file1.input);
+        LineParser file2LP = new LineParser(file2.input);
+        System.out.println(file1LP.integers.toString()+file2LP.integers.toString());
+
     }
 
     private static void readArguments(String[] s) {
