@@ -15,18 +15,16 @@ public class Main {
     public static void main(String[] args) {
         String[] s = ("-s -a -p sample- in1.txt in2.txt").split(" ");
         readArguments(s);
-        System.out.println(shortStats);
-        System.out.println(appendMode);
-        System.out.println(outputPath);
-        System.out.println(prefix);
-        System.out.println(inputFiles.toString());
-        FileReader file1 = new FileReader(inputFiles.get(0));
-        FileReader file2 = new FileReader(inputFiles.get(1));
-        System.out.println(file1.input);
-        System.out.println(file2.input);
-        LineParser file1LP = new LineParser(file1.input);
-        LineParser file2LP = new LineParser(file2.input);
-        System.out.println(file1LP.integers.toString()+file2LP.integers.toString());
+        List<String> input = new ArrayList<>();
+        {
+            FileReader file1 = new FileReader(inputFiles.get(0));
+            FileReader file2 = new FileReader(inputFiles.get(1));
+            input.addAll(file1.input);
+            input.addAll(file2.input);
+        }
+        LineParser lineParser = new LineParser(input);
+        showStatistic(lineParser);//Вывод статистики
+
 
     }
 
@@ -58,6 +56,30 @@ public class Main {
                 default:
                     inputFiles.add(s[i]);
             }
+        }
+    }
+    private static void showStatistic(LineParser lineParser){
+        System.out.println("Статистика");
+        if (shortStats){
+            System.out.println("Integers");
+            System.out.println("кол-во: "+lineParser.integersStats.getCount());
+            System.out.println("Floats");
+            System.out.println("кол-во: "+lineParser.floatsStats.getCount());
+            System.out.println("Strings");
+            System.out.println("кол-во: "+lineParser.stringsStats.getCount());
+        }else {
+            System.out.println("Integers");
+            System.out.println("кол-во: "+lineParser.integersStats.getCount());
+            System.out.println("макс значение: "+lineParser.integersStats.getMax());
+            System.out.println("мин значение: "+lineParser.integersStats.getMin());
+            System.out.println("Floats");
+            System.out.println("кол-во: "+lineParser.floatsStats.getCount());
+            System.out.println("макс значение: "+lineParser.floatsStats.getMax());
+            System.out.println("мин значение: "+lineParser.floatsStats.getMin());
+            System.out.println("Strings");
+            System.out.println("кол-во: "+lineParser.stringsStats.getCount());
+            System.out.println("макс значение: "+lineParser.stringsStats.getMax());
+            System.out.println("мин значение: "+lineParser.stringsStats.getMin());
         }
     }
 }

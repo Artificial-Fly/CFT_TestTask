@@ -6,8 +6,11 @@ import java.util.List;
 public class LineParser {
     List<String> input = new ArrayList<>();
     List<String> integers = new ArrayList<>();
+    Stats<Long> integersStats = new Stats<Long>(0,0L,0L);//в случае, если попадется число выходящее за диапазон int
     List<String> floats = new ArrayList<>();
+    Stats<Double> floatsStats = new Stats<Double>(0,0.0,0.0);//в случае, если попадется число выходящее за диапазон float
     List<String> strings = new ArrayList<>();
+    Stats<Integer> stringsStats = new Stats<Integer>(0,0,0);
 
     public LineParser(List<String> input) {
         this.input = input;
@@ -20,10 +23,34 @@ public class LineParser {
             String value = line.trim();
             if(value.matches(intRegex)){
                 integers.add(value);
+                integersStats.increaseCount();
+                long temp = Long.parseLong(value);//в случае, если попадется число выходящее за диапазон int
+                if(temp> integersStats.getMax()){
+                    integersStats.setMax(temp);
+                }
+                if(temp< integersStats.getMin()){
+                    integersStats.setMin(temp);
+                }
             }else if(value.matches(floatRegex)){
                 floats.add(value);
+                floatsStats.increaseCount();
+                double temp = Double.parseDouble(value);//в случае, если попадется число выходящее за диапазон float
+                if(temp> floatsStats.getMax()){
+                    floatsStats.setMax(temp);
+                }
+                if(temp< floatsStats.getMin()){
+                    floatsStats.setMin(temp);
+                }
             }else{
                 strings.add(value);
+                stringsStats.increaseCount();
+                int temp = value.length();
+                if(temp> stringsStats.getMax()){
+                    stringsStats.setMax(temp);
+                }
+                if(temp< stringsStats.getMin()){
+                    stringsStats.setMin(temp);
+                }
             }
         }
     }
