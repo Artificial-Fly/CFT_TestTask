@@ -20,6 +20,10 @@ public class Main {
         System.out.println(outputPath);
         System.out.println(prefix);
         System.out.println(inputFiles.toString());
+        FileReader file1 = new FileReader(inputFiles.get(0));
+        FileReader file2 = new FileReader(inputFiles.get(1));
+        System.out.println(file1.input);
+        System.out.println(file2.input);
     }
 
     private static void readArguments(String[] s) {
