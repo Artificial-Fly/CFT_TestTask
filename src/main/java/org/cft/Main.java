@@ -16,14 +16,10 @@ public class Main {
         String[] s = ("-s -a -p sample- in1.txt in2.txt").split(" ");
         readArguments(s);
         List<String> input = new ArrayList<>();
-        {
-            FileReader file1 = new FileReader(inputFiles.get(0));
-            FileReader file2 = new FileReader(inputFiles.get(1));
-            input.addAll(file1.input);
-            input.addAll(file2.input);
-        }
-        LineParser lineParser = new LineParser(input);
-        showStatistic(lineParser);//Вывод статистики
+        input.addAll(FileReader.readFile(inputFiles.get(0)));
+        input.addAll(FileReader.readFile(inputFiles.get(0)));
+        Parser parser = new Parser(input);
+        showStatistic(parser);//Вывод статистики
 
 
     }
@@ -50,7 +46,7 @@ public class Main {
                         i++;
                         prefix = s[i];
                     }else{
-                        System.out.println("Ошибка: после -p должен быть путь!!");
+                        System.out.println("Ошибка: после -p должен быть префикс!!");
                     }
                     break;
                 default:
@@ -58,28 +54,28 @@ public class Main {
             }
         }
     }
-    private static void showStatistic(LineParser lineParser){
+    private static void showStatistic(Parser parser){
         System.out.println("Статистика");
         if (shortStats){
             System.out.println("Integers");
-            System.out.println("кол-во: "+lineParser.integersStats.getCount());
+            System.out.println("кол-во: "+ parser.integersStats.getCount());
             System.out.println("Floats");
-            System.out.println("кол-во: "+lineParser.floatsStats.getCount());
+            System.out.println("кол-во: "+ parser.floatsStats.getCount());
             System.out.println("Strings");
-            System.out.println("кол-во: "+lineParser.stringsStats.getCount());
+            System.out.println("кол-во: "+ parser.stringsStats.getCount());
         }else {
             System.out.println("Integers");
-            System.out.println("кол-во: "+lineParser.integersStats.getCount());
-            System.out.println("макс значение: "+lineParser.integersStats.getMax());
-            System.out.println("мин значение: "+lineParser.integersStats.getMin());
+            System.out.println("кол-во: "+ parser.integersStats.getCount());
+            System.out.println("макс значение: "+ parser.integersStats.getMax());
+            System.out.println("мин значение: "+ parser.integersStats.getMin());
             System.out.println("Floats");
-            System.out.println("кол-во: "+lineParser.floatsStats.getCount());
-            System.out.println("макс значение: "+lineParser.floatsStats.getMax());
-            System.out.println("мин значение: "+lineParser.floatsStats.getMin());
+            System.out.println("кол-во: "+ parser.floatsStats.getCount());
+            System.out.println("макс значение: "+ parser.floatsStats.getMax());
+            System.out.println("мин значение: "+ parser.floatsStats.getMin());
             System.out.println("Strings");
-            System.out.println("кол-во: "+lineParser.stringsStats.getCount());
-            System.out.println("макс значение: "+lineParser.stringsStats.getMax());
-            System.out.println("мин значение: "+lineParser.stringsStats.getMin());
+            System.out.println("кол-во: "+ parser.stringsStats.getCount());
+            System.out.println("макс значение: "+ parser.stringsStats.getMax());
+            System.out.println("мин значение: "+ parser.stringsStats.getMin());
         }
     }
 }

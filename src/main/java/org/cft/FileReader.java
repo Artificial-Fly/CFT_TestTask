@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReader {
-    String path = "";
-    List<String> input = new ArrayList<>();
-    public FileReader(String path) {
-        this.path = path;
+
+    public static List<String> readFile(String path){
+        List<String> input = new ArrayList<>();
         try(BufferedReader reader = new BufferedReader(new java.io.FileReader(path))){
             String line;
             while((line = reader.readLine())!=null){
                 input.add(line);
             }
+            return input;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

@@ -3,7 +3,7 @@ package org.cft;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LineParser {
+public class Parser {
     List<String> input = new ArrayList<>();
     List<String> integers = new ArrayList<>();
     Stats<Long> integersStats = new Stats<Long>(0,0L,0L);//в случае, если попадется число выходящее за диапазон int
@@ -12,7 +12,7 @@ public class LineParser {
     List<String> strings = new ArrayList<>();
     Stats<Integer> stringsStats = new Stats<Integer>(0,0,0);
 
-    public LineParser(List<String> input) {
+    public Parser(List<String> input) {
         this.input = input;
         String intRegex = "^[+-]?\\d+$";
         String floatRegex = "^[+-]?(\\d+(\\.\\d+)?|\\.\\d+)([eE][+-]?\\d+)?$";
