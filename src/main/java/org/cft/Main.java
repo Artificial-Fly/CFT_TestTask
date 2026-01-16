@@ -16,11 +16,13 @@ public class Main {
         String[] s = ("-s -a -p sample- in1.txt in2.txt").split(" ");
         readArguments(s);
         List<String> input = new ArrayList<>();
-        input.addAll(FileReader.readFile(inputFiles.get(0)));
-        input.addAll(FileReader.readFile(inputFiles.get(0)));
+        input.addAll(FileInteraction.readFile(inputFiles.get(0)));
+        input.addAll(FileInteraction.readFile(inputFiles.get(0)));
         Parser parser = new Parser(input);
         showStatistic(parser);//Вывод статистики
-
+        FileInteraction.saveFile(outputPath, prefix+"integers.txt", parser.integers, appendMode);
+        FileInteraction.saveFile(outputPath, prefix+"floats.txt", parser.floats, appendMode);
+        FileInteraction.saveFile(outputPath, prefix+"strings.txt", parser.strings, appendMode);
 
     }
 
