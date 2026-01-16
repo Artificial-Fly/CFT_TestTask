@@ -1,5 +1,6 @@
 package org.cft;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +14,16 @@ public class Main {
     static List<String> inputFiles = new ArrayList<>();
 
     public static void main(String[] args) {
-        String[] s = ("-s -a -p sample- in1.txt in2.txt").split(" ");
-        readArguments(s);
+//        String[] s = ("-s -a -p sample- in1.txt in2.txt").split(" ");
+        readArguments(args);
         List<String> input = new ArrayList<>();
-        input.addAll(FileInteraction.readFile(inputFiles.get(0)));
-        input.addAll(FileInteraction.readFile(inputFiles.get(0)));
+        try {
+            for(String path : inputFiles){
+                input.addAll(FileInteraction.readFile(path));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         Parser parser = new Parser(input);
         showStatistic(parser);//Вывод статистики
         FileInteraction.saveFile(outputPath, prefix+"integers.txt", parser.integers, appendMode);
@@ -31,6 +37,8 @@ public class Main {
             switch (s[i]){
                 case "-s":
                     shortStats = true;
+                    break;
+                case "-f":
                     break;
                 case "-a":
                     appendMode=true;
@@ -60,24 +68,24 @@ public class Main {
         System.out.println("Статистика");
         if (shortStats){
             System.out.println("Integers");
-            System.out.println("кол-во: "+ parser.integersStats.getCount());
+            System.out.println("count: "+ parser.integersStats.getCount());
             System.out.println("Floats");
-            System.out.println("кол-во: "+ parser.floatsStats.getCount());
+            System.out.println("count: "+ parser.floatsStats.getCount());
             System.out.println("Strings");
-            System.out.println("кол-во: "+ parser.stringsStats.getCount());
+            System.out.println("count: "+ parser.stringsStats.getCount());
         }else {
             System.out.println("Integers");
-            System.out.println("кол-во: "+ parser.integersStats.getCount());
-            System.out.println("макс значение: "+ parser.integersStats.getMax());
-            System.out.println("мин значение: "+ parser.integersStats.getMin());
+            System.out.println("count: "+ parser.integersStats.getCount());
+            System.out.println("max: "+ parser.integersStats.getMax());
+            System.out.println("min: "+ parser.integersStats.getMin());
             System.out.println("Floats");
-            System.out.println("кол-во: "+ parser.floatsStats.getCount());
-            System.out.println("макс значение: "+ parser.floatsStats.getMax());
-            System.out.println("мин значение: "+ parser.floatsStats.getMin());
+            System.out.println("count: "+ parser.floatsStats.getCount());
+            System.out.println("max: "+ parser.floatsStats.getMax());
+            System.out.println("min: "+ parser.floatsStats.getMin());
             System.out.println("Strings");
-            System.out.println("кол-во: "+ parser.stringsStats.getCount());
-            System.out.println("макс значение: "+ parser.stringsStats.getMax());
-            System.out.println("мин значение: "+ parser.stringsStats.getMin());
+            System.out.println("count: "+ parser.stringsStats.getCount());
+            System.out.println("max: "+ parser.stringsStats.getMax());
+            System.out.println("min: "+ parser.stringsStats.getMin());
         }
     }
 }

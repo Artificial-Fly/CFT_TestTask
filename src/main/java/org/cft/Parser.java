@@ -28,7 +28,7 @@ public class Parser {
                 if(temp> integersStats.getMax()){
                     integersStats.setMax(temp);
                 }
-                if(temp< integersStats.getMin()){
+                if(temp< integersStats.getMin()||integersStats.getCount()==1){
                     integersStats.setMin(temp);
                 }
             }else if(value.matches(floatRegex)){
@@ -38,7 +38,7 @@ public class Parser {
                 if(temp> floatsStats.getMax()){
                     floatsStats.setMax(temp);
                 }
-                if(temp< floatsStats.getMin()){
+                if(temp< floatsStats.getMin()||floatsStats.getCount()==1){
                     floatsStats.setMin(temp);
                 }
             }else{
@@ -48,7 +48,7 @@ public class Parser {
                 if(temp> stringsStats.getMax()){
                     stringsStats.setMax(temp);
                 }
-                if(temp< stringsStats.getMin()){
+                if(temp< stringsStats.getMin()||stringsStats.getCount()==1){
                     stringsStats.setMin(temp);
                 }
             }
