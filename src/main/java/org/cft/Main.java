@@ -65,7 +65,7 @@ public class Main {
         }
     }
     private static void showStatistic(Parser parser){
-        System.out.println("Статистика");
+        System.out.println("Stats:");
         if (shortStats){
             System.out.println("Integers");
             System.out.println("count: "+ parser.integersStats.getCount());
