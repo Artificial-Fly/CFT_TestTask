@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
-    List<String> input = new ArrayList<>();
     List<String> integers = new ArrayList<>();
     Stats<Long> integersStats = new Stats<Long>(0,0L,0L);//в случае, если попадется число выходящее за диапазон int
     List<String> floats = new ArrayList<>();
@@ -13,7 +12,6 @@ public class Parser {
     Stats<Integer> stringsStats = new Stats<Integer>(0,0,0);
 
     public Parser(List<String> input) {
-        this.input = input;
         String intRegex = "^[+-]?\\d+$";
         String floatRegex = "^[+-]?(\\d+(\\.\\d+)?|\\.\\d+)([eE][+-]?\\d+)?$";
         for(String line : input){
