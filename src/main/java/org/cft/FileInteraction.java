@@ -9,11 +9,11 @@ import java.util.List;
 
 public class FileInteraction {
 
-    public static List<String> readFile(String path){
+    public static List<String> readFile(String path) {
         List<String> input = new ArrayList<>();
-        try(BufferedReader reader = new BufferedReader(new FileReader(path))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String line;
-            while((line = reader.readLine())!=null){
+            while ((line = reader.readLine()) != null) {
                 input.add(line);
             }
             return input;
@@ -23,22 +23,23 @@ public class FileInteraction {
             throw new RuntimeException(e);
         }
     }
-    public static void saveFile(String path, String name, List<String> lines, boolean appendMode){
-        if(lines == null || lines.isEmpty()){
+
+    public static void saveFile(String path, String name, List<String> lines, boolean appendMode) {
+        if (lines == null || lines.isEmpty()) {
             return;
         }
-        try{
+        try {
             Path dir = Path.of(path);
             Files.createDirectories(dir);
             Path file = dir.resolve(name);
-            if(appendMode){
+            if (appendMode) {
                 Files.write(file, lines, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-            }else{
+            } else {
                 Files.write(file, lines, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
             }
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
-        }catch(IOException e){
+        } catch (IOException e) {
             System.out.println("Ошибка записи файла: " + path + "/" + name);
         }
     }

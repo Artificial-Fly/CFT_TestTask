@@ -18,7 +18,7 @@ public class Main {
         readArguments(args);
         List<String> input = new ArrayList<>();
         try {
-            for(String path : inputFiles){
+            for (String path : inputFiles) {
                 input.addAll(FileInteraction.readFile(path));
             }
         } catch (Exception e) {
@@ -26,36 +26,36 @@ public class Main {
         }
         Parser parser = new Parser(input);
         showStatistic(parser);//Вывод статистики
-        FileInteraction.saveFile(outputPath, prefix+"integers.txt", parser.integers, appendMode);
-        FileInteraction.saveFile(outputPath, prefix+"floats.txt", parser.floats, appendMode);
-        FileInteraction.saveFile(outputPath, prefix+"strings.txt", parser.strings, appendMode);
+        FileInteraction.saveFile(outputPath, prefix + "integers.txt", parser.integers, appendMode);
+        FileInteraction.saveFile(outputPath, prefix + "floats.txt", parser.floats, appendMode);
+        FileInteraction.saveFile(outputPath, prefix + "strings.txt", parser.strings, appendMode);
 
     }
 
     private static void readArguments(String[] s) {
-        for(int i = 0; i< s.length; i++){
-            switch (s[i]){
+        for (int i = 0; i < s.length; i++) {
+            switch (s[i]) {
                 case "-s":
                     shortStats = true;
                     break;
                 case "-f":
                     break;
                 case "-a":
-                    appendMode=true;
+                    appendMode = true;
                     break;
                 case "-o":
-                    if(i+1< s.length){
+                    if (i + 1 < s.length) {
                         i++;
                         outputPath = s[i];
-                    }else{
+                    } else {
                         System.out.println("Ошибка: после -o должен быть путь!!");
                     }
                     break;
                 case "-p":
-                    if(i+1< s.length){
+                    if (i + 1 < s.length) {
                         i++;
                         prefix = s[i];
-                    }else{
+                    } else {
                         System.out.println("Ошибка: после -p должен быть префикс!!");
                     }
                     break;
@@ -64,28 +64,29 @@ public class Main {
             }
         }
     }
-    private static void showStatistic(Parser parser){
+
+    private static void showStatistic(Parser parser) {
         System.out.println("Stats:");
-        if (shortStats){
+        if (shortStats) {
             System.out.println("Integers");
-            System.out.println("count: "+ parser.integersStats.getCount());
+            System.out.println("count: " + parser.integersStats.getCount());
             System.out.println("Floats");
-            System.out.println("count: "+ parser.floatsStats.getCount());
+            System.out.println("count: " + parser.floatsStats.getCount());
             System.out.println("Strings");
-            System.out.println("count: "+ parser.stringsStats.getCount());
-        }else {
+            System.out.println("count: " + parser.stringsStats.getCount());
+        } else {
             System.out.println("Integers");
-            System.out.println("count: "+ parser.integersStats.getCount());
-            System.out.println("max: "+ parser.integersStats.getMax());
-            System.out.println("min: "+ parser.integersStats.getMin());
+            System.out.println("count: " + parser.integersStats.getCount());
+            System.out.println("max: " + parser.integersStats.getMax());
+            System.out.println("min: " + parser.integersStats.getMin());
             System.out.println("Floats");
-            System.out.println("count: "+ parser.floatsStats.getCount());
-            System.out.println("max: "+ parser.floatsStats.getMax());
-            System.out.println("min: "+ parser.floatsStats.getMin());
+            System.out.println("count: " + parser.floatsStats.getCount());
+            System.out.println("max: " + parser.floatsStats.getMax());
+            System.out.println("min: " + parser.floatsStats.getMin());
             System.out.println("Strings");
-            System.out.println("count: "+ parser.stringsStats.getCount());
-            System.out.println("max: "+ parser.stringsStats.getMax());
-            System.out.println("min: "+ parser.stringsStats.getMin());
+            System.out.println("count: " + parser.stringsStats.getCount());
+            System.out.println("max: " + parser.stringsStats.getMax());
+            System.out.println("min: " + parser.stringsStats.getMin());
         }
     }
 }
